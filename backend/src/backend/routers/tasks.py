@@ -12,7 +12,7 @@ router = APIRouter()
 @router.post("/tasks")
 def create_task(data: TaskCreate):
     with SessionLocal() as session:
-        task = Task(title=data.title, description=data.description)
+        task = Task(title=data.title)
 
         session.add(task)
         session.commit()
@@ -44,9 +44,6 @@ def update_task(task_id: int, data: TaskUpdate):
 
         if data.title is not None:
             task.title = data.title
-
-        if data.description is not None:
-            task.description = data.description
 
         if data.completed is not None:
             task.completed = data.completed
